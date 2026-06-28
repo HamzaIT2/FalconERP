@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="FalconERP.Application/FalconERP.Application.csproj" />
+  <Project Path="FalconERP.Domain/FalconERP.Domain.csproj" />
+  <Project Path="FalconERP.Infrastructure/FalconERP.Infrastructure.csproj" />
+  <Project Path="FalconERP.WPF/FalconERP.WPF.csproj" />
+</Solution>

@@ -1,0 +1,144 @@
+﻿<Window x:Class="FalconERP.WPF.Views.Dashbord.DashboardView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Falcon ERP"
+        Height="800"
+        Width="1400"
+        WindowStartupLocation="CenterScreen"
+        FlowDirection="RightToLeft">
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- الشريط العلوي -->
+
+        <Border Grid.Row="0"
+                Background="#1F2937">
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="مدير النظام"
+                           Foreground="White"
+                           VerticalAlignment="Center"
+                           Margin="20,0"/>
+
+                <TextBlock Grid.Column="1"
+                           Text="Falcon ERP"
+                           Foreground="White"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"/>
+
+            </Grid>
+
+        </Border>
+
+        <!-- المحتوى الرئيسي -->
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+
+                <!-- القائمة الجانبية -->
+
+                <ColumnDefinition Width="220"/>
+
+                <!-- منطقة العمل -->
+
+                <ColumnDefinition Width="*"/>
+
+            </Grid.ColumnDefinitions>
+
+            <!-- القائمة -->
+
+            <Border Grid.Column="0"
+                    Background="#374151">
+
+                <StackPanel Margin="10">
+
+                    <Button Content="الرئيسية"
+                            Height="45"
+                            Margin="0,5"/>
+                    
+                    <Button Content="العملاء"
+                            Height="45"
+                            Margin="0,5"
+                            Click="CustomersButton_Click"/>
+
+                    <Button Content="الموردون"
+                            Height="45"
+                            Margin="0,5"
+                            Click="SuppliersButton_Click"/>
+
+
+
+
+                    <Button Content="التصنيفات"
+                            Height="45"
+                            Margin="0,5"
+                            Click="CategoriesButton_Click"/>
+
+                    <Button Content="المنتجات"
+                            Height="45"
+                            Margin="0,5"
+                            Click="ProductsButton_Click"/>
+                    <Button Content="الوحدات والأسعار"
+                        Height="45"
+                        Margin="0,5"
+                        Click="ProductUnitsButton_Click"/>
+
+                    <Button Content="المخزون"
+                            Height="45"
+                            Margin="0,5"
+                            Click="InventoryButton_Click"/>
+                    <Button Content="أرصدة المخزون"
+                            Height="45"
+                            Margin="0,5"
+                            Click="StockBalanceButton_Click"/>
+
+                    <Button Content="المبيعات"
+                            Height="45"
+                            Margin="0,5"
+                            Click="SalesButton_Click"/>
+
+                    <Button Content="سجل المبيعات"
+                            Height="45"
+                            Margin="0,5"
+                            Click="SalesHistoryButton_Click"/>
+
+                    <Button Content="التقارير"
+                            Height="45"
+                            Margin="0,5"/>
+
+                    <Button Content="الإعدادات"
+                            Height="45"
+                            Margin="0,5"/>
+
+                </StackPanel>
+
+            </Border>
+
+            <!-- منطقة العمل -->
+            <Grid Grid.Column="1"
+                 Background="#F3F4F6">
+
+                <ContentControl x:Name="MainContent"/>
+
+            </Grid>
+
+
+        </Grid>
+
+    </Grid>
+
+</Window>

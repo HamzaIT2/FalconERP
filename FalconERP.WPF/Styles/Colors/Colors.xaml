@@ -1,0 +1,40 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Primary -->
+
+    <SolidColorBrush x:Key="PrimaryBrush"
+                     Color="#2563EB"/>
+
+    <!-- Success -->
+
+    <SolidColorBrush x:Key="SuccessBrush"
+                     Color="#16A34A"/>
+
+    <!-- Danger -->
+
+    <SolidColorBrush x:Key="DangerBrush"
+                     Color="#DC2626"/>
+
+    <!-- Warning -->
+
+    <SolidColorBrush x:Key="WarningBrush"
+                     Color="#F59E0B"/>
+
+    <!-- Background -->
+
+    <SolidColorBrush x:Key="BackgroundBrush"
+                     Color="#F8FAFC"/>
+
+    <!-- Card -->
+
+    <SolidColorBrush x:Key="CardBrush"
+                     Color="White"/>
+
+    <!-- Border -->
+
+    <SolidColorBrush x:Key="BorderBrush"
+                     Color="#E5E7EB"/>
+
+</ResourceDictionary>
