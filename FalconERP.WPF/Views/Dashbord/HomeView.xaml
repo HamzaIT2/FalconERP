@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="FalconERP.WPF.Views.Dashbord.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="#F3F4F6" Margin="20">
+
+        <UniformGrid Rows="2"
+                     Columns="3">
+
+            <Border Margin="10" Padding="20" Background="White" CornerRadius="10">
+                <StackPanel>
+                    <TextBlock Text="📦 المنتجات" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding ProductsCount}"
+                               FontSize="36"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <Border Margin="10" Padding="20" Background="White" CornerRadius="10">
+                <StackPanel>
+                    <TextBlock Text="👥 العملاء" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding CustomersCount}"
+                               FontSize="36"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <Border Margin="10" Padding="20" Background="White" CornerRadius="10">
+                <StackPanel>
+                    <TextBlock Text="🏢 الموردون" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding SuppliersCount}"
+                               FontSize="36"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <Border Margin="10" Padding="20" Background="White" CornerRadius="10">
+                <StackPanel>
+                    <TextBlock Text="💰 مبيعات اليوم" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding TodaySales}"
+                               FontSize="30"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <Border Margin="10" Padding="20" Background="White" CornerRadius="10">
+                <StackPanel>
+                    <TextBlock Text="🛒 مشتريات اليوم" FontSize="18" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding TodayPurchases}"
+                               FontSize="30"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+            <Border Margin="10" Padding="20" Background="White" CornerRadius="10">
+                <StackPanel>
+                    <TextBlock Text="⚠ منتجات منخفضة المخزون"
+                               FontSize="18"
+                               FontWeight="Bold"/>
+                    <TextBlock Text="{Binding LowStockProducts}"
+                               FontSize="36"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+
+        </UniformGrid>
+
+    </Grid>
+
+</UserControl>

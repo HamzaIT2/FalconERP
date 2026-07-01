@@ -18,7 +18,12 @@
         <DataGrid Grid.Row="1"
                   ItemsSource="{Binding Balances}"
                   AutoGenerateColumns="False"
-                  IsReadOnly="True">
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeRows="False"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow">
 
             <DataGrid.Columns>
 

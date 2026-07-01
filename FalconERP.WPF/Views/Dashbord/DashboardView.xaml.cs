@@ -2,7 +2,11 @@
 using FalconERP.WPF.Views.Customers;
 using FalconERP.WPF.Views.Inventory;
 using FalconERP.WPF.Views.Products;
+using FalconERP.WPF.Views.Purchases;
+using FalconERP.WPF.Views.Reports;
 using FalconERP.WPF.Views.Sales;
+using FalconERP.WPF.Views.Settings;
+using FalconERP.WPF.Views.Suppliers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +18,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using FalconERP.WPF.Views.Suppliers;
 namespace FalconERP.WPF.Views.Dashbord;
 
 /// <summary>
@@ -26,7 +29,7 @@ public partial class DashboardView : Window
     {
         InitializeComponent();
 
-        MainContent.Content = new CategoryView();
+        MainContent.Content = new HomeView();
     }
 
     private void CategoriesButton_Click(
@@ -91,7 +94,32 @@ public partial class DashboardView : Window
     }
 
 
+    private void PurchaseButton_Click(object sender, RoutedEventArgs e)
+    {
+        MainContent.Content = new PurchaseView();
+    }
 
+    private void PurchaseHistoryButton_Click(
+    object sender,
+    RoutedEventArgs e)
+    {
+        MainContent.Content = new PurchaseHistoryView();
+    }
+    private void HomeButton_Click(object sender, RoutedEventArgs e)
+    {
+        MainContent.Content = new HomeView();
+    }
 
+    private void ReportsButton_Click(object sender, RoutedEventArgs e)
+    {
+        MainContent.Content = new ReportsView();
+    }
+
+    private void SettingsButton_Click(
+    object sender,
+    RoutedEventArgs e)
+    {
+        MainContent.Content = new SettingsView();
+    }
 
 }

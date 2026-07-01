@@ -30,6 +30,15 @@ public class AppDbContext : DbContext
 
     public DbSet<Customer> Customers => Set<Customer>();
     public DbSet<Supplier> Suppliers => Set<Supplier>();
+
+
+    public DbSet<Purchase> Purchases => Set<Purchase>();
+
+    public DbSet<PurchaseItem> PurchaseItems => Set<PurchaseItem>();
+
+
+    public DbSet<SystemSettings> SystemSettings => Set<SystemSettings>();
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -83,6 +92,27 @@ public class AppDbContext : DbContext
             .HasOne(x => x.Customer)
             .WithMany()
             .HasForeignKey(x => x.CustomerId);
+
+
+        modelBuilder.Entity<PurchaseItem>()
+            .HasOne(x => x.Purchase)
+            .WithMany(x => x.Items)
+            .HasForeignKey(x => x.PurchaseId);
+
+        modelBuilder.Entity<PurchaseItem>()
+            .HasOne(x => x.Product)
+            .WithMany(x => x.PurchaseItems)
+            .HasForeignKey(x => x.ProductId);
+
+        modelBuilder.Entity<PurchaseItem>()
+            .HasOne(x => x.ProductUnit)
+            .WithMany(x => x.PurchaseItems)
+            .HasForeignKey(x => x.ProductUnitId);
+
+        modelBuilder.Entity<Purchase>()
+            .HasOne(x => x.Supplier)
+            .WithMany(x => x.Purchases)
+            .HasForeignKey(x => x.SupplierId);
 
 
 

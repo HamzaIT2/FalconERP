@@ -15,6 +15,8 @@ public class Sale : BaseEntity
 
     public int? CustomerId { get; set; }
 
+    public string InvoiceNumber { get; set; } = "";
+
     public Customer? Customer { get; set; }
 
     public ICollection<SaleItem> Items { get; set; }

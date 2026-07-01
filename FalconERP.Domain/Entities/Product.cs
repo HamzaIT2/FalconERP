@@ -19,4 +19,6 @@ public class Product : BaseEntity
     public bool IsActive { get; set; } = true;
 
     public ICollection<ProductUnit> Units { get; set; } = new List<ProductUnit>();
+    public ICollection<PurchaseItem> PurchaseItems
+    { get; set; } = new List<PurchaseItem>();
 }

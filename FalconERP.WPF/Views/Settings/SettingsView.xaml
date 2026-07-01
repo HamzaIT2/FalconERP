@@ -1,0 +1,152 @@
+﻿<UserControl x:Class="FalconERP.WPF.Views.Settings.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+
+        <StackPanel Margin="25">
+
+            <TextBlock Text="إعدادات النظام"
+                       FontSize="28"
+                       FontWeight="Bold"
+                       Margin="0,0,0,20"/>
+
+            <!-- معلومات المتجر -->
+
+            <GroupBox Header="معلومات المتجر"
+                      Margin="0,0,0,15">
+
+                <Grid Margin="15">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Margin="5">
+                        <TextBlock Text="اسم المتجر"/>
+                        <TextBox Text="{Binding StoreName}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Margin="5">
+                        <TextBlock Text="اسم المالك"/>
+                        <TextBox Text="{Binding OwnerName}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1" Margin="5">
+                        <TextBlock Text="الهاتف"/>
+                        <TextBox Text="{Binding Phone}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="1"
+                                Grid.Column="1"
+                                Margin="5">
+                        <TextBlock Text="البريد الإلكتروني"/>
+                        <TextBox Text="{Binding Email}"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2"
+                                Grid.ColumnSpan="2"
+                                Margin="5">
+                        <TextBlock Text="العنوان"/>
+                        <TextBox Text="{Binding Address}"/>
+                    </StackPanel>
+
+                </Grid>
+
+            </GroupBox>
+
+            <!-- إعدادات الطباعة -->
+
+            <GroupBox Header="إعدادات الطباعة"
+                      Margin="0,0,0,15">
+
+                <Grid Margin="15">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="180"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Margin="5">
+
+                        <TextBlock Text="الطابعة"/>
+
+                        <ComboBox
+                            ItemsSource="{Binding Printers}"
+                            SelectedItem="{Binding PrinterName}"/>
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1"
+                                Margin="5">
+
+                        <TextBlock Text="عرض الورق"/>
+
+                        <ComboBox SelectedValue="{Binding PaperWidth}"
+                                  SelectedValuePath="Tag">
+
+                            <ComboBoxItem Content="58 mm"
+                                          Tag="58"/>
+
+                            <ComboBoxItem Content="80 mm"
+                                          Tag="80"/>
+
+                        </ComboBox>
+
+                    </StackPanel>
+
+                    <CheckBox Grid.Row="1"
+                              Grid.ColumnSpan="2"
+                              Margin="5,15,5,5"
+                              Content="طباعة الفاتورة تلقائياً بعد الحفظ"
+                              IsChecked="{Binding AutoPrintReceipt}"/>
+
+                </Grid>
+
+            </GroupBox>
+
+            <!-- الفاتورة -->
+
+            <GroupBox Header="الفاتورة">
+
+                <StackPanel Margin="15">
+
+                    <TextBlock Text="العملة"/>
+
+                    <TextBox Text="{Binding Currency}"
+                             Margin="0,0,0,10"/>
+
+                    <TextBlock Text="رسالة أسفل الفاتورة"/>
+
+                    <TextBox Height="80"
+                             AcceptsReturn="True"
+                             Text="{Binding ReceiptFooter}"/>
+
+                </StackPanel>
+
+            </GroupBox>
+
+            <Button Margin="0,25,0,0"
+                    Width="180"
+                    Height="45"
+                    HorizontalAlignment="Center"
+                    Command="{Binding SaveCommand}"
+                    Content="حفظ الإعدادات"/>
+
+        </StackPanel>
+
+    </ScrollViewer>
+
+</UserControl>

@@ -98,6 +98,11 @@
                   
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserResizeRows="False"
+                  SelectionMode="Single"
+                  SelectionUnit="FullRow"
                   MouseDoubleClick="DataGrid_MouseDoubleClick">
 
             <DataGrid.Columns>

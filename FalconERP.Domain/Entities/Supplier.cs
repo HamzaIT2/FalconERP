@@ -15,4 +15,9 @@ public class Supplier : BaseEntity
     public decimal Balance { get; set; }
 
     public bool IsActive { get; set; } = true;
+
+    public ICollection<Purchase> Purchases
+    { get; set; } = new List<Purchase>();
+
+
 }

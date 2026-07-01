@@ -21,4 +21,7 @@ public class ProductUnit : BaseEntity
     public string? Barcode { get; set; }
 
     public bool IsDefault { get; set; }
+    public ICollection<PurchaseItem> PurchaseItems
+    { get; set; } = new List<PurchaseItem>();
+
 }

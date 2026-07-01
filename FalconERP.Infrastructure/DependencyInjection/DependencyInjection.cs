@@ -1,6 +1,7 @@
 ﻿using FalconERP.Application.Interfaces;
 using FalconERP.Infrastructure.Persistence;
 using FalconERP.Infrastructure.Persistence.Repositories;
+using FalconERP.Infrastructure.Printing;
 using FalconERP.Infrastructure.Repositories;
 using FalconERP.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,14 @@ public static class DependencyInjection
         services.AddScoped<ICustomerRepository, CustomerRepository>();
         services.AddScoped<ISupplierRepository, SupplierRepository>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<IPurchaseRepository, PurchaseRepository>();
+        services.AddScoped<IDashboardRepository, DashboardRepository>();
+        services.AddScoped<IReportsRepository, ReportsRepository>();
+        services.AddScoped<IExcelExportService, ExcelExportService>();
+        services.AddScoped<ISystemSettingsRepository,SystemSettingsRepository>();
+        services.AddScoped<ReceiptFactory>();
 
+        services.AddScoped<ReceiptPrinterService>();
         return services;
     }
 }

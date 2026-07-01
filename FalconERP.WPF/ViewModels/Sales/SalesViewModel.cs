@@ -11,7 +11,7 @@ namespace FalconERP.WPF.ViewModels.Sales;
 using FalconERP.WPF.ViewModels.Shared;
 using System.Linq;
 using System.Windows;
-
+using FalconERP.Infrastructure.Printing;
 public class SalesViewModel : BaseViewModel
 {
     private readonly ISaleRepository _saleRepository;
@@ -19,6 +19,9 @@ public class SalesViewModel : BaseViewModel
     private readonly IProductUnitRepository _productUnitRepository;
     private readonly IInventoryTransactionRepository _inventoryRepository;
     private readonly ICustomerRepository _customerRepository;
+    private readonly ISystemSettingsRepository _settingsRepository;
+    private readonly ReceiptFactory _receiptFactory;
+    private readonly ReceiptPrinterService _receiptPrinterService;
     public ObservableCollection<Product> Products { get; set; }
         = new();
     public ObservableCollection<Customer> Customers
@@ -28,7 +31,7 @@ public class SalesViewModel : BaseViewModel
     public ObservableCollection<ProductUnit> ProductUnits { get; set; }
         = new();
 
-
+   
 
     public ObservableCollection<SaleItemDto> SaleItems
     { get; set; } = new();
@@ -37,7 +40,16 @@ public class SalesViewModel : BaseViewModel
     public ICommand SaveInvoiceCommand { get; }
     public ICommand RemoveItemCommand { get; }
 
+    private string GenerateInvoiceNumber()
+    {
+        var count = _saleRepository
+            .GetAllAsync()
+            .GetAwaiter()
+            .GetResult()
+            .Count + 1;
 
+        return $"INV-{count:D6}";
+    }
 
     private Product? _selectedProduct;
 
@@ -126,22 +138,28 @@ public class SalesViewModel : BaseViewModel
         IProductRepository productRepository,
         IProductUnitRepository productUnitRepository,
         IInventoryTransactionRepository inventoryRepository,
-        ICustomerRepository customerRepository
-        )
+        ICustomerRepository customerRepository,
+        ISystemSettingsRepository settingsRepository,
+        ReceiptFactory receiptFactory,
+        ReceiptPrinterService receiptPrinterService)
     {
         _saleRepository = saleRepository;
         _productRepository = productRepository;
         _productUnitRepository = productUnitRepository;
         _inventoryRepository = inventoryRepository;
         _customerRepository = customerRepository;
-        AddItemCommand =new RelayCommand(AddItem);
+
+        _settingsRepository = settingsRepository;
+        _receiptFactory = receiptFactory;
+        _receiptPrinterService = receiptPrinterService;
+
+        AddItemCommand = new RelayCommand(AddItem);
         SaveInvoiceCommand = new RelayCommand(SaveInvoice);
-        RemoveItemCommand =new RelayCommand(RemoveItem);
+        RemoveItemCommand = new RelayCommand(RemoveItem);
 
         LoadProducts();
         LoadCustomers();
     }
-
     private void LoadProducts()
     {
         var products = _productRepository
@@ -286,12 +304,13 @@ public class SalesViewModel : BaseViewModel
 
         var sale = new Sale
         {
+            InvoiceNumber = GenerateInvoiceNumber(),
+
             SaleDate = DateTime.Now,
 
             CustomerId = SelectedCustomer?.Id,
 
             TotalAmount = GrandTotal,
-
 
             PaidAmount = PaidAmount,
 
@@ -316,6 +335,45 @@ public class SalesViewModel : BaseViewModel
             .AddAsync(sale)
             .GetAwaiter()
             .GetResult();
+
+
+        var settings = _settingsRepository
+            .GetAsync()
+            .GetAwaiter()
+            .GetResult();
+
+        if (settings is not null && settings.AutoPrintReceipt)
+        {
+            var receipt = _receiptFactory.CreateSaleReceipt(
+                SaleItems,
+                SelectedCustomer,
+                settings,
+                sale.InvoiceNumber,
+                sale.SaleDate,
+                sale.TotalAmount,
+                sale.PaidAmount,
+                sale.RemainingAmount);
+
+            var bytes = _receiptPrinterService.BuildReceiptBytes(receipt);
+
+            try
+            {
+                RawPrinterHelper.SendBytes(
+                    settings.PrinterName,
+                    bytes);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(
+                    $"تعذر إرسال الفاتورة للطابعة.\n\n{ex.Message}",
+                    "Falcon ERP",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+            }
+        }
+
+
+
 
         if (SelectedCustomer != null && RemainingAmount > 0)
         {
@@ -400,5 +458,6 @@ public class SalesViewModel : BaseViewModel
         OnPropertyChanged(nameof(GrandTotal));
         OnPropertyChanged(nameof(RemainingAmount));
     }
+
 
 }

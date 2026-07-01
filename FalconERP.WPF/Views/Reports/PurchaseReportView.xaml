@@ -1,0 +1,171 @@
+﻿<UserControl x:Class="FalconERP.WPF.Views.Reports.PurchaseReportView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Margin="20">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- عنوان الصفحة -->
+
+        <TextBlock Text="تقرير المشتريات"
+                   FontSize="28"
+                   FontWeight="Bold"/>
+
+        <!-- الفلاتر -->
+
+        <Border Grid.Row="1"
+                Margin="0,20,0,10"
+                Padding="15"
+                BorderBrush="#DDDDDD"
+                BorderThickness="1"
+                CornerRadius="8">
+
+            <WrapPanel>
+
+                <TextBlock Text="من"
+                           VerticalAlignment="Center"
+                           Margin="5"/>
+
+                <DatePicker Width="140"
+                            Margin="5"
+                            SelectedDate="{Binding FromDate}"/>
+
+                <TextBlock Text="إلى"
+                           VerticalAlignment="Center"
+                           Margin="10,5,5,5"/>
+
+                <DatePicker Width="140"
+                            Margin="5"
+                            SelectedDate="{Binding ToDate}"/>
+
+                <TextBlock Text="المورد"
+                           VerticalAlignment="Center"
+                           Margin="10,5,5,5"/>
+
+                <TextBox Width="180"
+                         Margin="5"
+                         Text="{Binding SearchText,
+                                        UpdateSourceTrigger=PropertyChanged}"/>
+
+                <Button Content="بحث"
+                        Width="100"
+                        Margin="10,5"
+                        Command="{Binding FilterCommand}"/>
+
+            </WrapPanel>
+
+        </Border>
+
+        <!-- الإحصائيات -->
+
+        <UniformGrid Grid.Row="2"
+                     Columns="3"
+                     Margin="0,10">
+
+            <Border Margin="5"
+                    Padding="15"
+                    BorderBrush="#DDDDDD"
+                    BorderThickness="1"
+                    CornerRadius="8">
+
+                <StackPanel>
+
+                    <TextBlock Text="إجمالي المشتريات"
+                               FontWeight="Bold"/>
+
+                    <TextBlock Text="{Binding TotalPurchases}"
+                               FontSize="24"/>
+
+                </StackPanel>
+
+            </Border>
+
+            <Border Margin="5"
+                    Padding="15"
+                    BorderBrush="#DDDDDD"
+                    BorderThickness="1"
+                    CornerRadius="8">
+
+                <StackPanel>
+
+                    <TextBlock Text="إجمالي المدفوع"
+                               FontWeight="Bold"/>
+
+                    <TextBlock Text="{Binding TotalPaid}"
+                               FontSize="24"/>
+
+                </StackPanel>
+
+            </Border>
+
+            <Border Margin="5"
+                    Padding="15"
+                    BorderBrush="#DDDDDD"
+                    BorderThickness="1"
+                    CornerRadius="8">
+
+                <StackPanel>
+
+                    <TextBlock Text="إجمالي المتبقي"
+                               FontWeight="Bold"/>
+
+                    <TextBlock Text="{Binding TotalRemaining}"
+                               FontSize="24"/>
+
+                </StackPanel>
+
+            </Border>
+
+        </UniformGrid>
+
+        <!-- الجدول -->
+
+        <DataGrid Grid.Row="3"
+                  Margin="0,15,0,0"
+                  ItemsSource="{Binding Purchases}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="رقم الفاتورة"
+                                    Binding="{Binding Id}"
+                                    Width="110"/>
+
+                <DataGridTextColumn Header="التاريخ"
+                                    Binding="{Binding PurchaseDate}"
+                                    Width="170"/>
+
+                <DataGridTextColumn Header="المورد"
+                                    Binding="{Binding Supplier.Name}"
+                                    Width="220"/>
+
+                <DataGridTextColumn Header="الإجمالي"
+                                    Binding="{Binding TotalAmount}"
+                                    Width="120"/>
+
+                <DataGridTextColumn Header="المدفوع"
+                                    Binding="{Binding PaidAmount}"
+                                    Width="120"/>
+
+                <DataGridTextColumn Header="المتبقي"
+                                    Binding="{Binding RemainingAmount}"
+                                    Width="120"/>
+
+                <DataGridTextColumn Header="الملاحظات"
+                                    Binding="{Binding Notes}"
+                                    Width="250"/>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+    </Grid>
+
+</UserControl>
